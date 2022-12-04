@@ -2,16 +2,14 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from operaciones.helpers.ejercicios_random import EjercicioRandom
 # from operaciones.helpers.union import Union
 
 # Create your views here.
 class OperacionesView(APIView):
     def get(self,request,format = None):
-        res = {
-            'operacion' : "union",
-            'c1' : "{a,b,c}",
-            'c2' : "{c,v}"
-        }
+        er = EjercicioRandom() #[0,8746,8745,45,773,773,773,916] operacionRandom,∪,∩,-,‾,Δ
+        res = er.generar(0)
         return Response(res, status = status.HTTP_200_OK)
 
 # class UnionView(APIView):
