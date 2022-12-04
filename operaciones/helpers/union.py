@@ -1,16 +1,15 @@
 class Union():
 
     def __init__(self):
-        
         self.blank='blank'
         self.right='right'
         self.left='left'
         self.static='static'
         self.finalState='q8'
         self.inicialState='q1'
-        self.outputTape=[]
-        for x in range(100):
-            self.outputTape.append(self.blank)                     #Creating and filling outPutTape with blanks
+        self.outputTape = []
+        for _ in range(100):
+            self.outputTape.append(self.blank)                  #Creating and filling outPutTape with blanks
 
         self.transitions=[
         #( Firts block )  --->  (     Second block       )    
@@ -139,7 +138,7 @@ class Union():
     def ejecutar(self, conjunto):
         accepted=self.turingMachine(conjunto) #Write here your input {}#{}
         result=''
-        print(self.outputTape)
+        # print(self.outputTape)
         for char in self.outputTape:
             if char!=self.blank:
                 result+=char
