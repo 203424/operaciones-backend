@@ -1,26 +1,20 @@
-# import string
-
 class Union():
-#   Creating and filling outPutTape with blanks
-    def transport_str(self,tape):
-        aux = []
-        for x in tape:
-            aux.append(x)
-        return aux
 
-    def turing_machine(self,input_tape):
-        blank='blank'
-        right='right'
-        left='left'
-        static='static'
-        final_state='q8'
-        # alphabeth=list(string.ascii_lowercase)
-        inicial_state='q1'
-        output_tape=[blank for blank in range(200)]   
+    def __init__(self):
+        
+        self.blank='blank'
+        self.right='right'
+        self.left='left'
+        self.static='static'
+        self.finalState='q8'
+        self.inicialState='q1'
+        self.outputTape=[]
+        for x in range(100):
+            self.outputTape.append(self.blank)                     #Creating and filling outPutTape with blanks
 
-        transitions=[
+        self.transitions=[
         #( Firts block )  --->  (     Second block       )    
-        ['q1',"{",blank,        'q2',blank,'{',right,right],
+        ['q1',"{",self.blank,        'q2',self.blank,'{',self.right,self.right],
         ['q2', 'a', 'blank', 'q3', 'blank', 'a', 'right', 'right'],
         ['q2', 'b', 'blank', 'q3', 'blank', 'b', 'right', 'right'],
         ['q2', 'c', 'blank', 'q3', 'blank', 'c', 'right', 'right'],
@@ -47,11 +41,21 @@ class Union():
         ['q2', 'x', 'blank', 'q3', 'blank', 'x', 'right', 'right'],
         ['q2', 'y', 'blank', 'q3', 'blank', 'y', 'right', 'right'],
         ['q2', 'z', 'blank', 'q3', 'blank', 'z', 'right', 'right'],
-        ['q3',',',blank,  'q2',blank,',',right,right],
-        ['q3','}',blank,  'q4',blank,',',right,right],
-        ['q2','}',blank,  'q4',blank,',',right,right],
-        ['q4','#',blank,  'q5',blank,blank,right,static],
-        ['q5','{',blank,  'q6',blank,blank,right,static],
+        ['q2', '0', 'blank', 'q3', 'blank', '0', 'right', 'right'],
+        ['q2', '1', 'blank', 'q3', 'blank', '1', 'right', 'right'],
+        ['q2', '2', 'blank', 'q3', 'blank', '2', 'right', 'right'],
+        ['q2', '3', 'blank', 'q3', 'blank', '3', 'right', 'right'],
+        ['q2', '4', 'blank', 'q3', 'blank', '4', 'right', 'right'],
+        ['q2', '5', 'blank', 'q3', 'blank', '5', 'right', 'right'],
+        ['q2', '6', 'blank', 'q3', 'blank', '6', 'right', 'right'],
+        ['q2', '7', 'blank', 'q3', 'blank', '7', 'right', 'right'],
+        ['q2', '8', 'blank', 'q3', 'blank', '8', 'right', 'right'],
+        ['q2', '9', 'blank', 'q3', 'blank', '9', 'right', 'right'],
+        ['q3',',',self.blank,  'q2',self.blank,',',self.right,self.right],
+        ['q3','}',self.blank,  'q4',self.blank,',',self.right,self.right],
+        ['q2','}',self.blank,  'q4',self.blank,self.blank,self.right,self.static],
+        ['q4','#',self.blank,  'q5',self.blank,self.blank,self.right,self.static],
+        ['q5','{',self.blank,  'q6',self.blank,self.blank,self.right,self.static],
         ['q6', 'a', 'blank', 'q7', 'blank', 'a', 'right', 'right'],
         ['q6', 'b', 'blank', 'q7', 'blank', 'b', 'right', 'right'],
         ['q6', 'c', 'blank', 'q7', 'blank', 'c', 'right', 'right'],
@@ -78,49 +82,70 @@ class Union():
         ['q6', 'x', 'blank', 'q7', 'blank', 'x', 'right', 'right'],
         ['q6', 'y', 'blank', 'q7', 'blank', 'y', 'right', 'right'],
         ['q6', 'z', 'blank', 'q7', 'blank', 'z', 'right', 'right'],
-        ['q7',',',blank,  'q6',blank,',',right,right],
-        ['q6','}',blank,  'q9',blank,blank,right,left],
-        ['q9',blank,',',  'q8',blank,'}',static,right],
-        ['q7','}',blank,  'q8',blank,'}',right,right],
+        ['q6', '0', 'blank', 'q7', 'blank', '0', 'right', 'right'],
+        ['q6', '1', 'blank', 'q7', 'blank', '1', 'right', 'right'],
+        ['q6', '2', 'blank', 'q7', 'blank', '2', 'right', 'right'],
+        ['q6', '3', 'blank', 'q7', 'blank', '3', 'right', 'right'],
+        ['q6', '4', 'blank', 'q7', 'blank', '4', 'right', 'right'],
+        ['q6', '5', 'blank', 'q7', 'blank', '5', 'right', 'right'],
+        ['q6', '6', 'blank', 'q7', 'blank', '6', 'right', 'right'],
+        ['q6', '7', 'blank', 'q7', 'blank', '7', 'right', 'right'],
+        ['q6', '8', 'blank', 'q7', 'blank', '8', 'right', 'right'],
+        ['q6', '9', 'blank', 'q7', 'blank', '9', 'right', 'right'],
+        ['q7',',',self.blank,  'q6',self.blank,',',self.right,self.right],
+        ['q6','}',self.blank,  'q9',self.blank,self.blank,self.right,self.left],
+        ['q9',self.blank,',',  'q8',self.blank,'}',self.static,self.right],
+        ['q9',self.blank,'{',  'q10',self.blank,'{',self.static,self.right],
+        ['q10',self.blank,self.blank,  'q8',self.blank,'}',self.static,self.right],
+        ['q7','}',self.blank,  'q8',self.blank,'}',self.right,self.right],
     ] 
 
-        input_tape= self.transport_str(input_tape)
-        state= inicial_state
+    def transportStr(self,tape):
+        aux =[]
+        for x in tape:
+            aux.append(x)
+        return aux
+    def turingMachine(self,inputTape):
+        inputTape=self.transportStr(inputTape)
+        state=self.inicialState
         head1=0
         head2=0
-        input_tape.append(blank)
+        inputTape.append(self.blank)
 
-        for _ in range(len(input_tape)): #Iterating each letter from the input
+        for i in range(len(inputTape)): #Iterating each letter from the input
             band=False
-            for single_t in transitions:
-                if single_t[0] == state  and single_t[2]==output_tape[head2] and single_t[1]==input_tape[head1]:
-                    output_tape[head2]=single_t[5]
-                    input_tape[head1]=single_t[4]
-                    if single_t[6]==right:
+            for singleT in self.transitions:
+                if singleT[0] == state  and singleT[2]==self.outputTape[head2] and singleT[1]==inputTape[head1]:
+                    self.outputTape[head2]=singleT[5]
+                    inputTape[head1]=singleT[4]
+                    if singleT[6]==self.right:
                         head1+=1
-                    if single_t[6]==left:
+                    if singleT[6]==self.left:
                         head1-=1
-                    if single_t[7]==right:
+                    if singleT[7]==self.right:
                         head2+=1
-                    if single_t[7]==left:
+                    if singleT[7]==self.left:
                         head2-=1
-                    state=single_t[3]
+                    state=singleT[3]
                     band=True
-                    
+
             if(band==False):
                 break
-        if state==final_state:
-            result=''
-            for char in output_tape:
-                if char!=blank:
-                    result+=char
-                if char==blank:
-                    break
-            return result
+        if state==self.finalState:
+            return True
         return False
-    
-# accepted=turingMachine("{a}#{z,x,y,a}") #Write here your input {}#{}
-# if accepted:
-#     print (f'Turing Machine is done: \n {result}')
-# else:
-#     print(f'String not Accepted')
+
+
+    def ejecutar(self, conjunto):
+        accepted=self.turingMachine(conjunto) #Write here your input {}#{}
+        result=''
+        print(self.outputTape)
+        for char in self.outputTape:
+            if char!=self.blank:
+                result+=char
+            if char==self.blank:
+                break
+        if accepted:
+            return result
+        else:
+            return False
