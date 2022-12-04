@@ -51,7 +51,7 @@ class Complemento():
     #Creating transitions q4 -> q2 with all the alphabet
         result=[]
         for i in range(len(listAux)):
-            result.append(['q4',listAux[i],','        'q2',listAux[i],',',self.right,self.right])
+            result.append(['q4',listAux[i],','        'q1',listAux[i],',',self.right,self.right])
             self.transitions.append(result[i])
             
     #Creating transitions q4 -> q5 with all the alphabet
@@ -60,7 +60,7 @@ class Complemento():
             result.append(['q4','}',listAux[j],        'q5','}',listAux[j],self.static,self.static])
             self.transitions.append(result[i])
             
-    #Creating transitions q4 -> q5 with all the alphabet
+    #Creating transitions q1 -> q6 with all the alphabet
         result=[]
         for i in range(len(listAux)):
             result.append(['q1','}',listAux[j],        'q6','}',listAux[j],self.static,self.static])
