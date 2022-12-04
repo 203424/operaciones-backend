@@ -30,7 +30,7 @@ class Complemento():
     #Creating transitions q2 -> q1 with all the alphabet
         result=[]
         for i in range(len(listAux)):
-            result.append(['q2',listAux[i],','        'q1',listAux[i],',',self.static,self.right])
+            result.append(['q2',listAux[i],',',        'q1',listAux[i],',',self.static,self.right])
             self.transitions.append(result[i])
             
     #Creating transitions q2 -> q3 with all the alphabet
@@ -44,15 +44,27 @@ class Complemento():
         for i in range(len(listAux)):
             for j in range(len(listAux)):
                 if listAux[i] == listAux[j]: 
-                    result.append(['q1',listAux[i],listAux[j],'q4',listAux[i],listAux[j],self.right,self.right])
+                    result.append(['q1',listAux[i],listAux[j],    'q4',listAux[i],listAux[j],self.right,self.static])
         for x in result:
             self.transitions.append(x)
     
-    #Creating transitions q4 -> q1 with all the alphabet
+    #Creating transitions q4 -> q7 with all the alphabet
         result=[]
         for i in range(len(listAux)):
-            result.append(['q4',listAux[i],','        'q1',listAux[i],',',self.right,self.right])
+            result.append(['q4',',',listAux[j],       'q7',',',listAux[j],self.right,self.static])
             self.transitions.append(result[i])
+            
+    #Creating transitions q7 -> q7 with all the alphabet
+        result=[]
+        for i in range(len(listAux)):
+            result.append(['q7',listAux[i],listAux[j],       'q7',listAux[i],listAux[j],self.static,self.left])
+            self.transitions.append(result[i]) 
+    
+    #Creating transitions q7 -> q1 with all the alphabet
+        result=[]
+        for i in range(len(listAux)):
+            result.append(['q7',listAux[i],'{',       'q1',listAux[i],'{',self.static,self.right])
+            self.transitions.append(result[i]) 
             
     #Creating transitions q4 -> q5 with all the alphabet
         result=[]
@@ -65,7 +77,18 @@ class Complemento():
         for i in range(len(listAux)):
             result.append(['q1','}',listAux[j],        'q6','}',listAux[j],self.static,self.static])
             self.transitions.append(result[i])
-        
+            
+    def transportStr(self,tape):
+        aux =[]
+        for x in tape:
+            aux.append(x)
+        return aux
+
+    def turingMachine(self,inputTape1,inputTape2):
+        inputTape1=self.transportStr(inputTape1)
+        inputTape2=self.transportStr(inputTape2)       
+        state=self.inicialState
+         
     def comprobar():
        pass
         
