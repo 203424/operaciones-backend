@@ -48,7 +48,7 @@ class Complemento():
         for x in result:
             self.transitions.append(x)
     
-    #Creating transitions q4 -> q2 with all the alphabet
+    #Creating transitions q4 -> q1 with all the alphabet
         result=[]
         for i in range(len(listAux)):
             result.append(['q4',listAux[i],','        'q1',listAux[i],',',self.right,self.right])
