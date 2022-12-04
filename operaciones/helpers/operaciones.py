@@ -10,7 +10,8 @@ class Operaciones():
         self.auxInter =Interseccion()
         self.auxUnion =Union()
 
-    def union(self, cinta):
+    def union(self, cinta1, cinta2):
+        cinta = cinta1+"#"+cinta2
         res=self.auxUnion.ejecutar(cinta)
         #Mandar a llamar el limpieador de repetidos
         return res
