@@ -94,6 +94,7 @@ class Complemento():
         state=self.inicialState
         head1=0
         head2=0
+        head3=0
         inputTape1.append(self.blank)
         inputTape2.append(self.blank)
         while len(inputTape1) != head1 and len(inputTape2) !=head2: #Iterating each letter from the input
