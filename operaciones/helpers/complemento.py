@@ -1,9 +1,7 @@
 import string
-from operaciones.helpers.diferencia import Diferencia
 
 class Complemento():
     def __init__(self):
-        self._diferencia = Diferencia()
         self.right='right'
         self.left='left'
         self.static='static'
@@ -126,12 +124,18 @@ class Complemento():
             return True
         return False
          
-    def comprobar():
-       pass
-        
     def ejecutar(self,universo,conjunto):
-        #si los elemntos del conjunto pertenecen al universo se ejecuta diferencia
-        auxDiferencia = self._diferencia.ejecutar(universo, conjunto)
-        return auxDiferencia
-        #si no, Falso
-        pass
+
+        self.fillT()
+        accepted=self.turingMachine(universo,conjunto) #Write here your input {}#{}
+        result=''
+        for char in self.outputTape:
+            if char!=self.blank:
+                result+=char
+            if char==self.blank:
+                break
+        if accepted:
+            return result
+        else:
+            return False
+
