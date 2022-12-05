@@ -9,6 +9,10 @@ class Complemento():
         self.static='static'
         self.finalState=['q3','q5','q6']
         self.inicialState='q0'
+        self.blank='blank'
+        self.outputTape=[]                     #Creating and filling outPutTape with blanks
+        for i in range (200):
+            self.outputTape.append(self.blank)
         
         self.transitions=[
         #( Firts block )  --->  (     Second block       )    
@@ -88,6 +92,38 @@ class Complemento():
         inputTape1=self.transportStr(inputTape1)
         inputTape2=self.transportStr(inputTape2)       
         state=self.inicialState
+        head1=0
+        head2=0
+        inputTape1.append(self.blank)
+        inputTape2.append(self.blank)
+        while len(inputTape1) != head1 and len(inputTape2) !=head2: #Iterating each letter from the input
+            # for j in range(len(inputTape2)):
+                band=False
+                for singleT in self.transitions:
+                    if singleT[0] == state  and singleT[3]==self.outputTape[head3] and singleT[1]==inputTape1[head1] and singleT[2]==inputTape2[head2] :
+                        inputTape1[head1]=singleT[5]
+                        inputTape2[head2]=singleT[6]
+                        self.outputTape[head3]=singleT[7]
+                        if singleT[8]==self.right:
+                            head1+=1
+                        if singleT[8]==self.left:
+                            head1-=1
+                        if singleT[9]==self.right:
+                            head2+=1
+                        if singleT[9]==self.left:
+                            head2-=1
+                        if singleT[10]==self.right:
+                            head3+=1
+                        if singleT[10]==self.left:
+                            head3-=1
+                        state=singleT[4]
+                        band=True
+
+                if(band==False):
+                    break
+        if state==self.finalState[1][2]:
+            return True
+        return False
          
     def comprobar():
        pass
