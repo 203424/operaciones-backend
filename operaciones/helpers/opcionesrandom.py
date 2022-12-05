@@ -1,6 +1,6 @@
 import random
 import string
-class OperacionesRandom():
+class OpcionesRandom():
     def __init__(self):
         res=''
         self.listAux=list(string.ascii_lowercase)
@@ -22,7 +22,7 @@ class OperacionesRandom():
                     pass
                 i+=1
             for i in range (2):
-                aux2=random.sample(elementos,3)
+                aux2=random.sample(elementos,len(elementos))
                 aux3.append('{')
                 for element in aux2:
                     aux3.append(element)
@@ -35,7 +35,7 @@ class OperacionesRandom():
                 aux3=[]
             while correctas[0]==correctas[1]:
                 correctas.pop()
-                aux2=random.sample(elementos,3)
+                aux2=random.sample(elementos,len(elementos))
                 aux3.append('{')
                 for element in aux2:
                     aux3.append(element)
@@ -97,7 +97,7 @@ class OperacionesRandom():
                             string=''.join(aux3)
                             incorrectas.append(string)
                             aux3=[]
-                print(incorrectas)            
+                # print(incorrectas)            
         elif len(res)==2 or len(res)==3:
             for i in range (4):
                 aux3.append('{')
@@ -133,13 +133,13 @@ class OperacionesRandom():
         result=''
         result2=''
         resultfinal=[]
-        result=OperacionesRandom().randomizarConjunto(res)
-        result2=OperacionesRandom().RespuestasIncorrectas(res)
+        result=OpcionesRandom().randomizarConjunto(res)
+        result2=OpcionesRandom().RespuestasIncorrectas(res)
         resultfinal=result+result2
         return resultfinal
 
 
-# print(OperacionesRandom().ejecutar("{a,b,c}"))
+# print(OpcionesRandom().ejecutar("{a,b,c}"))
     
 
 

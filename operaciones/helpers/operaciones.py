@@ -4,6 +4,7 @@ from operaciones.helpers.interseccion import Interseccion
 from operaciones.helpers.union import Union
 from operaciones.helpers.complemento import Complemento
 from operaciones.helpers.desecharRepetidos import DesecharRepetidos
+from operaciones.helpers.opcionesrandom import OpcionesRandom
 
 class Operaciones():
     def __init__(self):
@@ -13,6 +14,7 @@ class Operaciones():
         self.auxUnion =Union()
         self.auxComp = Complemento()
         self.auxDesechar = DesecharRepetidos()
+        self.auxOpRandom = OpcionesRandom()
 
     def union(self, cinta1, cinta2):
         cinta = cinta1+"#"+cinta2
@@ -42,4 +44,6 @@ class Operaciones():
             if dif!=False:
                 return self.auxDesechar.ejecutar(dif)
         return False
+    def opcionesRandom(self,respuesta):
+        return self.auxOpRandom.ejecutar(respuesta)
 

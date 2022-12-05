@@ -12,7 +12,7 @@ class Complemento():
         self.transitions=[
         #( Firts block )  --->  (     Second block       )    
             ['q0','{','{',        'q1','{','{',self.right,self.right],
-            ['q1','}','}',        'q3','}','}',self.static,self.static]  
+            ['q1','}','}',        'q5','}','}',self.static,self.static]  
         ] 
     def fillT(self):
         listAux=list(string.ascii_lowercase) + ["0","1","2","3","4","5","6","7","8","9"]
