@@ -124,9 +124,9 @@ class Complemento():
             return True
         return False
         
-    def ejecutar(self,universo,conjunto):
+    def ejecutar(self,conjunto,universo):
         self.fillT()
-        accepted=self.turingMachine(universo,conjunto) #Write here your input {}#{}
+        accepted=self.turingMachine(conjunto,universo) #Write here your input {}#{}
         result=''
         for char in self.outputTape:
             if char!=self.blank:
