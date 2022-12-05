@@ -39,7 +39,7 @@ class Operaciones():
         res=self.auxComp.ejecutar(cinta1,cinta2)
         if res:
             dif=self.auxDif.ejecutar(cinta2,cinta1)
-            if res!=False:
-                return self.auxDesechar.ejecutar(res)
+            if dif!=False:
+                return self.auxDesechar.ejecutar(dif)
         return False
 

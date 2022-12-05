@@ -111,10 +111,6 @@ class Complemento():
                         head2-=1
                     state=singleT[3]
                     band=True
-                    print(f'state:{state}')
-                    print(f'head1:{inputTape1[head1]}')
-                    print(f'head2:{inputTape2[head2]}')
-
             if(band==False):
                 break
         if state==self.finalState[1] or state==self.finalState[2]:
