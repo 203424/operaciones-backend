@@ -125,5 +125,3 @@ class Complemento():
             return True
         else:
             return False
-prueba = Complemento()
-print(prueba.ejecutar('{a,b,c}', {'a,e'}))
