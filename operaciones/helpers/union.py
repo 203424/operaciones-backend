@@ -138,7 +138,6 @@ class Union():
     def ejecutar(self, conjunto):
         accepted=self.turingMachine(conjunto) #Write here your input {}#{}
         result=''
-        # print(self.outputTape)
         for char in self.outputTape:
             if char!=self.blank:
                 result+=char

@@ -17,30 +17,30 @@ class OperacionesView(APIView):
             return Response("Parametro "+str(op)+" invalido", status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, operacion,format=None):  # request.data = {c1: ConjuntoA, c2:ConjuntoB}
+        operaciones = ["union","interseccion","dif_rel","dif_sim","complemento"]
         cinta1 = request.data['c1'].replace(" ","")
         cinta2 = request.data['c2'].replace(" ","")
-
-        res = {
-            "union": Operacion().union(cinta1,cinta2), 
-            "interseccion": Operacion().interseccion(cinta1,cinta2),
-            "dif_rel": Operacion().diferencia(cinta1,cinta2), 
-            "dif_sim": Operacion().diferenciaSimetrica(cinta1,cinta2),
-            "complemento": Operacion().complemento(cinta2,cinta1)
-        }
-        if operacion in res.keys():
+        res = Operacion()
+        if operacion in operaciones:
+            #Se realiza la operacion que se necesita
+            if operacion == "union":
+                result = res.union(cinta1,cinta2)
+            elif operacion == "interseccion":
+                result = res.interseccion(cinta1,cinta2)
+            elif operacion == "dif_rel":
+                result = res.diferencia(cinta1,cinta2)
+            elif operacion == "dif_sim":
+                result = res.diferenciaSimetrica(cinta1,cinta2)
+            elif operacion == "complemento":
+                result = res.complemento(cinta2,cinta1)
+            #Si en la data que llega del front se obtiene el atributo 'respuesta' se contrasta con la obtenida por la maquina
             if 'respuesta' in  request.data.keys():
                 user_res = request.data['respuesta']
-                if res[operacion] != False and user_res == res[operacion]:
+                if user_res == result:
                     return Response("Correcto",status=status.HTTP_202_ACCEPTED)
-                else:
-                    res_error = {
-                        "result" : res[operacion],
-                        "state" : "Incorrecto"
-                    }
-                    return Response(res_error,status=status.HTTP_400_BAD_REQUEST)
-            if res[operacion] != False:
-                return Response(res[operacion], status=status.HTTP_202_ACCEPTED)
-            else:
-                return Response("La operacion no es aceptada", status=status.HTTP_400_BAD_REQUEST)
+                return Response(result,status=status.HTTP_400_BAD_REQUEST)
+            if result != False:
+                return Response(result, status=status.HTTP_202_ACCEPTED)
+            return Response("La operacion no es aceptada", status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response("Parametro "+str(operacion)+" invalido", status=status.HTTP_400_BAD_REQUEST)
+            return Response("Parametro '"+str(operacion)+"' invalido", status=status.HTTP_400_BAD_REQUEST)

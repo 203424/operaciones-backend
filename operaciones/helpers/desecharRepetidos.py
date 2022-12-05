@@ -147,4 +147,3 @@ class DesecharRepetidos():
             return result
         else:
             return False
-print(DesecharRepetidos().ejecutar("{}"))
