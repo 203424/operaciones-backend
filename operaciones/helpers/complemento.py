@@ -120,7 +120,7 @@ class Complemento():
 
                 if(band==False):
                     break
-        if state==self.finalState[1][2]:
+        if state==self.finalState[1] or state==self.finalState[2]:
             return True
         return False
         
