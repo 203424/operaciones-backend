@@ -31,6 +31,8 @@ class Operaciones():
         return res
     def complemento(self,cinta1,cinta2):
         res=self.auxComp.ejecutar(cinta1,cinta2)
-        return res
-        
+        if res:
+            dif=self.auxDif.ejecutar(cinta2,cinta1)
+            return dif
+        return False
 
