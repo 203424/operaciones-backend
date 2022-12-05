@@ -111,7 +111,8 @@ class Union():
         head2=0
         inputTape.append(self.blank)
 
-        for i in range(len(inputTape)): #Iterating each letter from the input
+        # for i in range(len(inputTape)): #Iterating each letter from the input
+        while len(inputTape) != head1: #Iterating each letter from the input
             band=False
             for singleT in self.transitions:
                 if singleT[0] == state  and singleT[2]==self.outputTape[head2] and singleT[1]==inputTape[head1]:
