@@ -25,7 +25,7 @@ class OperacionesView(APIView):
             "interseccion": Operacion().interseccion(cinta1,cinta2),
             "dif_rel": Operacion().diferencia(cinta1,cinta2), 
             "dif_sim": Operacion().diferenciaSimetrica(cinta1,cinta2),
-            "complemento": Operacion().complemento(cinta1,cinta2)
+            "complemento": Operacion().complemento(cinta2,cinta1)
         }
         if operacion in res.keys():
             if 'respuesta' in  request.data.keys():
