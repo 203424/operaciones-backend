@@ -8,7 +8,7 @@ from operaciones.helpers.operaciones import Operaciones as Operacion
 
 class OperacionesView(APIView):
     def get(self, request, op, format=None):
-        operaciones = {"union": 8746, "interseccion": 8745,"dif_rel": 45, "dif_sim": 916, "complemento": 733, "random": 0}
+        operaciones = {"union": 8746, "interseccion": 8745,"dif_rel": 45, "dif_sim": 916, "complemento": 773, "random": 0}
         if (op in operaciones.keys()): # [8746,8745,45,916,773,0] ∪,∩,-,Δ,‾, operacionRandom
             er = EjercicioRandom()
             res = er.generar(operaciones[op]) #res = {c1: ConjuntoA, c2:ConjuntoB, operador: operaciones[op]}
