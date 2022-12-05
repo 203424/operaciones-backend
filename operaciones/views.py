@@ -19,6 +19,7 @@ class OperacionesView(APIView):
     def post(self, request, operacion,format=None):  # request.data = {c1: ConjuntoA, c2:ConjuntoB}
         cinta1 = request.data['c1'].replace(" ","")
         cinta2 = request.data['c2'].replace(" ","")
+
         res = {
             "union": Operacion().union(cinta1,cinta2), 
             "interseccion": Operacion().interseccion(cinta1,cinta2),
@@ -27,7 +28,16 @@ class OperacionesView(APIView):
             "complemento": Operacion().complemento(cinta1,cinta2)
         }
         if operacion in res.keys():
-            print(res[operacion])
+            if 'respuesta' in  request.data.keys():
+                user_res = request.data['respuesta']
+                if res[operacion] != False and user_res == res[operacion]:
+                    return Response("Correcto",status=status.HTTP_202_ACCEPTED)
+                else:
+                    res_error = {
+                        "result" : res[operacion],
+                        "state" : "Incorrecto"
+                    }
+                    return Response(res_error,status=status.HTTP_400_BAD_REQUEST)
             if res[operacion] != False:
                 return Response(res[operacion], status=status.HTTP_202_ACCEPTED)
             else:
