@@ -123,9 +123,8 @@ class Complemento():
         if state==self.finalState[1][2]:
             return True
         return False
-         
+        
     def ejecutar(self,universo,conjunto):
-
         self.fillT()
         accepted=self.turingMachine(universo,conjunto) #Write here your input {}#{}
         result=''
