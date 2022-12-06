@@ -2,11 +2,11 @@ import string
 from random import choice, randint
 
 class EjercicioRandom():
-    def seleccionar_elementos(self,alfabeto,forzar_vacio):
+    def seleccionar_elementos(self,alfabeto,forzar_vacio,min_longitud,max_longitud):
         elementos = []
         es_vacio = False if forzar_vacio else choice([False,False,True,False,False])  #1/5 probabilidades de que sea vacio
         if es_vacio == False:
-            longitud = randint(5,11)
+            longitud = randint(min_longitud,max_longitud+1)
             for _ in range(longitud):
                 elementos.append(choice(alfabeto))
         return elementos
@@ -37,13 +37,13 @@ class EjercicioRandom():
                 conjunto_s.append(elemento)
         return conjunto_s
 
-    def generar(self,operacion):
+    def generar(self,operacion,min_longitud,max_longitud):
         ejercicio = {} #c1: ConjuntoA, c2:ConjuntoB, operador: OperacionRandom
         alfabeto = list(string.ascii_lowercase) + ["0","1","2","3","4","5","6","7","8","9"]
         unicode_op = [8746,8745,45,773,916] #∪,∩,-,‾,Δ
                                                     #para usar en html se antepone &# al numero
-        c1 = self.seleccionar_elementos(alfabeto,False) #crea una lista de elementos
-        c2 = self.seleccionar_elementos(alfabeto,False) #crea una lista de elementos
+        c1 = self.seleccionar_elementos(alfabeto,False,min_longitud,max_longitud) #crea una lista de elementos
+        c2 = self.seleccionar_elementos(alfabeto,False,min_longitud,max_longitud) #crea una lista de elementos
         #Definir que elementos de C1 estaran en C2
         for _ in range(4):
             if len(c1) != 0:
