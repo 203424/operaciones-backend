@@ -14,7 +14,7 @@ class OpcionesRandom():
         aux2=[]
         aux3=[]
         i=0
-        if len(res)>5:
+        if len(res)>=5:
             for element in aux:
                 if aux[i] != "{" and aux[i] != "}" and aux[i] != ",":
                     elementos.append(res[i])
@@ -59,7 +59,7 @@ class OpcionesRandom():
         
         n=True
         i=0
-        if len(res)>5:
+        if len(res)>=5:
             for element in aux:
                 if aux[i] != "{" and aux[i] != "}" and aux[i] != ",":
                     elementos.append(res[i])
@@ -67,7 +67,7 @@ class OpcionesRandom():
                     pass
                 i+=1
             for i in range (4):
-                aux2=random.sample(elementos,3)
+                aux2=random.sample(elementos,len(elementos))
                 aux3.append('{')
                 for element in aux2:
                     aux3.append(element)
@@ -84,7 +84,7 @@ class OpcionesRandom():
                     if incorrectas[i]== incorrectas[i-1]:
                         while incorrectas[i]== incorrectas[i-1]:
                             incorrectas.pop()
-                            aux2=random.sample(elementos,3)
+                            aux2=random.sample(elementos,len(elementos))
                             aux3.append('{')
                             for element in aux2:
                                 aux3.append(element)
@@ -139,7 +139,7 @@ class OpcionesRandom():
         return resultfinal
 
 
-# print(OpcionesRandom().ejecutar("{a,b,c}"))
+# print(OpcionesRandom().ejecutar("{a,c}"))
     
 
 
