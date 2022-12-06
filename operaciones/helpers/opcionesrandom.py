@@ -1,164 +1,78 @@
 import random
 import string
-class OpcionesRandom():
-    def __init__(self):
-        res=''
-        self.listAux=list(string.ascii_lowercase)
+class OpcionesRandom():        
+    def extraer_elementos(self,lista_respuesta):
+        elementos = []
+        for c in lista_respuesta:
+            if c != "{" and c != "," and c!="}":
+                elementos.append(c)
+        return elementos
+
+    def barajar_elementos(self,elementos):
+        return random.sample(elementos,len(elementos))
         
-    #     #declaración de funciones        
-    def randomizarConjunto(self,res):
-        string=''
-        correctas=[]
-        elementos=[]
-        aux=list(res)
-        aux2=[]
-        aux3=[]
-        i=0
-        if len(res)>=5:
-            for element in aux:
-                if aux[i] != "{" and aux[i] != "}" and aux[i] != ",":
-                    elementos.append(res[i])
-                else:
-                    pass
-                i+=1
-            for i in range (2):
-                aux2=random.sample(elementos,len(elementos))
-                aux3.append('{ opcion:"{')
-                for element in aux2:
-                    aux3.append(element)
-                    aux3.append(',')
-                if aux3[-1]==',':
-                    aux3.pop()
-                aux3.append('}",state=true}')
-                string=''.join(aux3)
-                correctas.append(string)
-                aux3=[]
-            while correctas[0]==correctas[1]:
-                correctas.pop()
-                aux2=random.sample(elementos,len(elementos))
-                aux3.append('{ opcion:"{')
-                for element in aux2:
-                    aux3.append(element)
-                    aux3.append(',')
-                if aux3[-1]==',':
-                    aux3.pop()
-                aux3.append('}",state=true}')
-                string=''.join(aux3)
-                correctas.append(string)
-                aux3=[]       
-        elif len(res)==2 or len(res)==3:
-            correctas=[res]
-        return correctas
-        
-    def RespuestasIncorrectas(self,res,tape1,tape2):
-        string=''
-        incorrectas=[]
-        elementos=[]
-        elementos2=[]
-        aux=list(res)
-        aux2=[]
-        aux3=[]
-        aux4=list(tape1)
-        aux5=list(tape2)
-        
-        n=True
-        i=0
-        if len(res)>=5:
-            for element in aux:
-                if aux[i] != "{" and aux[i] != "}" and aux[i] != ",":
-                    elementos.append(res[i])
-                else:
-                    pass
-                i+=1
-                print(i)
-            i=0
-            print(i)
-            for element in aux4:
-                if aux4[i] != "{" and aux4[i] != "}" and aux4[i] != ",":
-                    elementos2.append(tape1[i])
-                else:
-                    pass
-                i+=1
-            i=0
-            for element in aux5:
-                if aux5[i] != "{" and aux5[i] != "}" and aux5[i] != ",":
-                    elementos2.append(tape2[i])
-                else:
-                    pass
-                i+=1
-            i=0
-            for i in range (4):
-                aux2=random.sample(elementos,len(elementos))
-                aux3.append('{ opcion:"{')
-                for element in aux2:
-                    aux3.append(element)
-                    aux3.append(',')
-                    aux3.append(random.choice(elementos2))
-                    aux3.append(',')
-                if aux3[-1]==',':
-                    aux3.pop()
-                aux3.append('}",state=false}')
-                string=''.join(aux3)
-                incorrectas.append(string)
-                aux3=[]
-                if i>=1:
-                    if incorrectas[i]== incorrectas[i-1]:
-                        while incorrectas[i]== incorrectas[i-1]:
-                            incorrectas.pop()
-                            aux2=random.sample(elementos,len(elementos))
-                            aux3.append('{ opcion:"{')
-                            for element in aux2:
-                                aux3.append(element)
-                                aux3.append(',')
-                                aux3.append(random.choice(elementos2))
-                                aux3.append(',')
-                            if aux3[-1]==',':
-                                aux3.pop()
-                            aux3.append('}",state=false}')
-                            string=''.join(aux3)
-                            incorrectas.append(string)
-                            aux3=[]
-                # print(incorrectas)            
-        elif len(res)==2 or len(res)==3:
-            for i in range (4):
-                aux3.append('{')
-                for i in range(random.randint(1,3)):
-                    aux3.append(self.listAux[random.randint(0,25)])
-                    aux3.append(',')
-                if aux3[-1]==',':
-                    aux3.pop()
-                aux3.append('}')
-                string=''.join(aux3)
-                incorrectas.append(string)
-                aux3=[]
-                if i>=1:
-                    if incorrectas[i]== incorrectas[i-1]:
-                        while incorrectas[i]== incorrectas[i-1]:
-                            incorrectas.pop()
-                            aux2=random.sample(elementos,3)
-                            aux3.append('{')
-                            for i in range(random.randint(1,3)):
-                                aux3.append(self.listAux[random.randint(0,25)])
-                                aux3.append(',')
-                            if aux3[-1]==',':
-                                aux3.pop()
-                            aux3.append('}')
-                            string=''.join(aux3)
-                            incorrectas.append(string)
-                            aux3=[]
-        return incorrectas
-            
+    def escribir_conjunto(self,elementos):
+        conjunto = "{"
+        for e in elementos:
+            conjunto += e
+            conjunto += ","
+        if conjunto.endswith(","):
+            conjunto = conjunto.rstrip(conjunto[-1])
+        conjunto += "}"
+        return conjunto
+
+    def generar_correctas(self,res):
+        opciones = []
+        elementos=self.extraer_elementos(list(res))
+        combinaciones = []
+        if len(elementos) >= 2:
+            while len(combinaciones) < 2:
+                aux = self.barajar_elementos(elementos)
+                if aux not in combinaciones:
+                    combinaciones.append(aux)
+            for combinacion in combinaciones:
+                conjunto = self.escribir_conjunto(combinacion)
+                opciones.append({"opcion":conjunto,"state":True})
+        else:
+            opciones.append({"opcion":res,"state":True})
+        return opciones
+
+    def generar_universo(self,lista_universo):
+        universo = []
+        for elemento in lista_universo:
+            if elemento not in universo:
+                universo.append(elemento)
+        return universo
+
+    def validar_equivalencia(self,conjunto1, conjunto2):
+        return (set(conjunto1) == set(conjunto2))
+
+    def generar_incorrectas(self,res,tape1,tape2):
+        elementos_respuesta = self.extraer_elementos(list(res))
+        elementos_universo = self.generar_universo(self.extraer_elementos(list(tape1)) + self.extraer_elementos(list(tape2)))
+        combinaciones = []
+        aux = []
+        opciones = []
+        while len(combinaciones) < 4:
+            if len(elementos_respuesta) >= 2:
+                aux = self.barajar_elementos(elementos_respuesta)
+                for _ in range(random.randint(1,2)):
+                    aux.insert(random.randint(0,len(aux)),random.choice(elementos_universo)) #inserta en una posicion random un elemento random
+            else:
+                for _ in range(random.randint(1,2)):
+                    aux.append(random.choice(elementos_universo))
+            if aux not in combinaciones and self.validar_equivalencia(aux,elementos_respuesta) == False:
+                combinaciones.append(aux)
+            aux = []
+        for combinacion in combinaciones:
+            conjunto = self.escribir_conjunto(combinacion)
+            opciones.append({"opcion":conjunto,"state":False})
+        return opciones            
 
     def ejecutar(self,res,tape1,tape2):
-        # res='{a,b,c}'
-        result=''
-        result2=''
-        resultfinal=[]
-        result=OpcionesRandom().randomizarConjunto(res)
-        result2=OpcionesRandom().RespuestasIncorrectas(res,tape1,tape2)
+        result=OpcionesRandom().generar_correctas(res)
+        result2=OpcionesRandom().generar_incorrectas(res,tape1,tape2)
         resultfinal=result+result2
-        
+        for _ in range(5):
+            resultfinal = random.sample(resultfinal,len(resultfinal)) #barajea los items dentro de la misma lista
         return resultfinal
-print(OpcionesRandom().ejecutar("{a,c}",'{a,b,c}','{a,b,c}'))
-
-
