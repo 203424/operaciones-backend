@@ -63,7 +63,7 @@ class EjercicioView(APIView):
             elif res['operador'] == 773:
                 result  = mt.complemento(res['c2'],res['c1'])
             res["correcta"] = result
-            res['result'] = mt.opcionesRandom(result)
+            res['result'] = mt.opcionesRandom(result,res['c1'],res['c2'])
             return Response(res, status=status.HTTP_200_OK)
         else:
             return Response("Parametro "+str(op)+" invalido", status=status.HTTP_400_BAD_REQUEST)

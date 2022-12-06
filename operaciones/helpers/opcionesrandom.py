@@ -29,7 +29,7 @@ class OpcionesRandom():
                     aux3.append(',')
                 if aux3[-1]==',':
                     aux3.pop()
-                aux3.append('}",state=False}')
+                aux3.append('}",state=true}')
                 string=''.join(aux3)
                 correctas.append(string)
                 aux3=[]
@@ -42,13 +42,14 @@ class OpcionesRandom():
                     aux3.append(',')
                 if aux3[-1]==',':
                     aux3.pop()
-                aux3.append('}",state=False}')
+                aux3.append('}",state=true}')
                 string=''.join(aux3)
                 correctas.append(string)
                 aux3=[]       
         elif len(res)==2 or len(res)==3:
             correctas=[res]
         return correctas
+        
     def RespuestasIncorrectas(self,res,tape1,tape2):
         string=''
         incorrectas=[]
@@ -96,7 +97,7 @@ class OpcionesRandom():
                     aux3.append(',')
                 if aux3[-1]==',':
                     aux3.pop()
-                aux3.append('}",state=False}')
+                aux3.append('}",state=false}')
                 string=''.join(aux3)
                 incorrectas.append(string)
                 aux3=[]
@@ -113,7 +114,7 @@ class OpcionesRandom():
                                 aux3.append(',')
                             if aux3[-1]==',':
                                 aux3.pop()
-                            aux3.append('}",state=False}')
+                            aux3.append('}",state=false}')
                             string=''.join(aux3)
                             incorrectas.append(string)
                             aux3=[]

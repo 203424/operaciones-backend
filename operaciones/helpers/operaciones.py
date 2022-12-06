@@ -44,6 +44,6 @@ class Operaciones():
             if dif!=False:
                 return self.auxDesechar.ejecutar(dif)
         return False
-    def opcionesRandom(self,respuesta):
-        return self.auxOpRandom.ejecutar(respuesta)
+    def opcionesRandom(self,respuesta,tape1,tape2):
+        return self.auxOpRandom.ejecutar(respuesta,tape1,tape2)
 
