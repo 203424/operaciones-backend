@@ -55,7 +55,7 @@ class EjercicioRandom():
         ejercicio["operador"] = choice(unicode_op) if operacion==0 else operacion #Selecciona una operacion random
         if ejercicio["operador"] == 773: #se genera un subconjunto
             if len(c1) == 0: #Rellena el conjunto universal en caso de que sea vacio
-                c1 = self.seleccionar_elementos(alfabeto,True)
+                c1 = self.seleccionar_elementos(alfabeto,True,min_longitud,max_longitud)
             c1 = self.quitar_repetidos(c1) #el universo no puede tener elementos repetidos
             ejercicio["c1"] = self.escribir_conjunto(c1)
             ejercicio["c2"] = self.generar_subconjunto(c1) #genera un subconjunto dado un universo
