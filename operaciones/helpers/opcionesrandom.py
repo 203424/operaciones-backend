@@ -136,13 +136,8 @@ class OpcionesRandom():
         result=OpcionesRandom().randomizarConjunto(res)
         result2=OpcionesRandom().RespuestasIncorrectas(res)
         resultfinal=result+result2
+        
         return resultfinal
-
-
 # print(OpcionesRandom().ejecutar("{a,c}"))
-    
-
-
-    
 
 
