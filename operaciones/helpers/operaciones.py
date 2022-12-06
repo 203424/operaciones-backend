@@ -4,7 +4,7 @@ from operaciones.helpers.interseccion import Interseccion
 from operaciones.helpers.union import Union
 from operaciones.helpers.complemento import Complemento
 from operaciones.helpers.desecharRepetidos import DesecharRepetidos
-from operaciones.helpers.opcionesrandom import OpcionesRandom
+from operaciones.helpers.opciones_random import OpcionesRandom
 
 class Operaciones():
     def __init__(self):
@@ -44,6 +44,6 @@ class Operaciones():
             if dif!=False:
                 return self.auxDesechar.ejecutar(dif)
         return False
-    def opcionesRandom(self,respuesta,tape1,tape2):
+    def opciones_random(self,respuesta,tape1,tape2):
         return self.auxOpRandom.ejecutar(respuesta,tape1,tape2)
 

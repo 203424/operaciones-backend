@@ -1,5 +1,4 @@
 import random
-import string
 class OpcionesRandom():        
     def extraer_elementos(self,lista_respuesta):
         elementos = []
@@ -70,8 +69,8 @@ class OpcionesRandom():
         return opciones            
 
     def ejecutar(self,res,tape1,tape2):
-        result=OpcionesRandom().generar_correctas(res)
-        result2=OpcionesRandom().generar_incorrectas(res,tape1,tape2)
+        result=self.generar_correctas(res)
+        result2=self.generar_incorrectas(res,tape1,tape2)
         resultfinal=result+result2
         for _ in range(5):
             resultfinal = random.sample(resultfinal,len(resultfinal)) #barajea los items dentro de la misma lista

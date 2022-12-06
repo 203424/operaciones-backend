@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from operaciones.helpers.ejercicios_random import EjercicioRandom
 from operaciones.helpers.operaciones import Operaciones as Operacion
+from operaciones.helpers.opciones_random import OpcionesRandom
 # Create your views here.
 
 class OperacionesView(APIView):
@@ -63,13 +64,7 @@ class EjercicioView(APIView):
             elif res['operador'] == 773:
                 result  = mt.complemento(res['c2'],res['c1'])
             res["result"] = result
+            res["opciones"] = OpcionesRandom().ejecutar(result,res["c1"],res["c2"])
             return Response(res, status=status.HTTP_200_OK)
         else:
             return Response("Parametro "+str(op)+" invalido", status=status.HTTP_400_BAD_REQUEST)
-    
-    def post(self,request,format=None):
-        mt = Operacion()
-        res = mt.opcionesRandom(request.data["result"],request.data["c1"],request.data["c2"])
-        if res != "":
-            return Response(res, status=status.HTTP_200_OK)
-        return Response("No se pudieron obtener las opciones aleatorias", status=status.HTTP_400_BAD_REQUEST)
