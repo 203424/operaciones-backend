@@ -1,4 +1,4 @@
-import random
+import random, string
 class OpcionesRandom():        
     def extraer_elementos(self,lista_respuesta):
         elementos = []
@@ -54,15 +54,22 @@ class OpcionesRandom():
         opciones = []
         if len(elementos_respuesta) >= 2:
             while len(combinaciones) < 4:
-                aux = self.barajar_elementos(elementos_respuesta)
+                aux = self.barajar_elementos(aux)
+                if aux not in combinaciones:
+                    if self.validar_equivalencia(aux,elementos_respuesta) == False:
+                        combinaciones.append(aux)
+                    else:
+                        elemento_aux = random.choice(aux)
+                        aux.remove(elemento_aux)
+                        elementos_universo = aux  #reduce el universo
                 for _ in range(random.randint(1,2)):
                     aux.insert(random.randint(0,len(aux)),random.choice(elementos_universo))
-                if aux not in combinaciones and self.validar_equivalencia(aux,elementos_respuesta) == False:
-                    combinaciones.append(aux)            #inserta en una posicion random un elemento random
         else:
             while len(combinaciones) < 4:
-                for _ in range(random.randint(1,2)):
-                    aux.append(random.choice(elementos_universo))
+                for x in range(random.randint(1,2)):
+                    aux.append(random.choice(elementos_universo + list(string.ascii_lowercase)))
+                    if x == 1:
+                        aux = ""
                 if aux not in combinaciones and self.validar_equivalencia(aux,elementos_respuesta) == False:
                     combinaciones.append(aux)
                 aux = []
@@ -75,7 +82,7 @@ class OpcionesRandom():
         result=self.generar_correctas(res)
         result2=self.generar_incorrectas(res,tape1,tape2)
         resultfinal=result+result2
-        #for _ in range(5):
-        resultfinal = random.sample(resultfinal,len(resultfinal)) #barajea los items dentro de la misma lista
+        for _ in range(5):
+            resultfinal = random.sample(resultfinal,len(resultfinal)) #barajea los items dentro de la misma lista
         return resultfinal
-print(OpcionesRandom().ejecutar("{a}", "{a,e,i,o,u}", "{a,o}"))
+print(OpcionesRandom().ejecutar("{}", "{}", "{}"))
