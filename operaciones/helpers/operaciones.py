@@ -16,8 +16,7 @@ class Operaciones():
         self.auxDesechar = DesecharRepetidos()
         self.auxOpRandom = OpcionesRandom()
 
-    def union(self, cinta1, cinta2):
-        cinta = cinta1+"#"+cinta2
+    def union(self, cinta):
         res=self.auxUnion.ejecutar(cinta)
         if res!=False:
             return self.auxDesechar.ejecutar(res)

@@ -56,13 +56,15 @@ class OpcionesRandom():
             while len(combinaciones) < 4:
                 aux = self.barajar_elementos(elementos_respuesta)
                 for _ in range(random.randint(1,2)):
-                    aux.insert(random.randint(0,len(aux)),random.choice(elementos_universo)) #inserta en una posicion random un elemento random
+                    aux.insert(random.randint(0,len(aux)),random.choice(elementos_universo))
+                if aux not in combinaciones and self.validar_equivalencia(aux,elementos_respuesta) == False:
+                    combinaciones.append(aux)            #inserta en una posicion random un elemento random
         else:
             for _ in range(random.randint(1,2)):
                 aux.append(random.choice(elementos_universo))
-        if aux not in combinaciones and self.validar_equivalencia(aux,elementos_respuesta) == False:
-            combinaciones.append(aux)
-        aux = []
+            if aux not in combinaciones and self.validar_equivalencia(aux,elementos_respuesta) == False:
+                combinaciones.append(aux)
+            aux = []
         for combinacion in combinaciones:
             conjunto = self.escribir_conjunto(combinacion)
             opciones.append({"opcion":conjunto,"state":False})
@@ -72,6 +74,7 @@ class OpcionesRandom():
         result=self.generar_correctas(res)
         result2=self.generar_incorrectas(res,tape1,tape2)
         resultfinal=result+result2
-        for _ in range(5):
-            resultfinal = random.sample(resultfinal,len(resultfinal)) #barajea los items dentro de la misma lista
+        #for _ in range(5):
+        resultfinal = random.sample(resultfinal,len(resultfinal)) #barajea los items dentro de la misma lista
         return resultfinal
+# print(OpcionesRandom().ejecutar("{a,b,c,d,g,e}", "{a,e,i,o,u}", "{a,o}"))

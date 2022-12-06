@@ -1,5 +1,4 @@
 class Union():
-
     def __init__(self):
         self.blank='blank'
         self.right='right'
@@ -13,7 +12,7 @@ class Union():
 
         self.transitions=[
         #( Firts block )  --->  (     Second block       )    
-        ['q1',"{",self.blank,        'q2',self.blank,'{',self.right,self.right],
+        ['q1',"{",'blank',        'q2','blank','{','right','right'],
         ['q2', 'a', 'blank', 'q3', 'blank', 'a', 'right', 'right'],
         ['q2', 'b', 'blank', 'q3', 'blank', 'b', 'right', 'right'],
         ['q2', 'c', 'blank', 'q3', 'blank', 'c', 'right', 'right'],
@@ -50,11 +49,11 @@ class Union():
         ['q2', '7', 'blank', 'q3', 'blank', '7', 'right', 'right'],
         ['q2', '8', 'blank', 'q3', 'blank', '8', 'right', 'right'],
         ['q2', '9', 'blank', 'q3', 'blank', '9', 'right', 'right'],
-        ['q3',',',self.blank,  'q2',self.blank,',',self.right,self.right],
-        ['q3','}',self.blank,  'q4',self.blank,',',self.right,self.right],
-        ['q2','}',self.blank,  'q4',self.blank,self.blank,self.right,self.static],
-        ['q4','#',self.blank,  'q5',self.blank,self.blank,self.right,self.static],
-        ['q5','{',self.blank,  'q6',self.blank,self.blank,self.right,self.static],
+        ['q3',',','blank',  'q2','blank',',','right','right'],
+        ['q3','}','blank',  'q4','blank',',','right','right'],
+        ['q2','}','blank',  'q4','blank','blank','right','static'],
+        ['q4','#','blank',  'q5','blank','blank','right','static'],
+        ['q5','{','blank',  'q6','blank','blank','right','static'],
         ['q6', 'a', 'blank', 'q7', 'blank', 'a', 'right', 'right'],
         ['q6', 'b', 'blank', 'q7', 'blank', 'b', 'right', 'right'],
         ['q6', 'c', 'blank', 'q7', 'blank', 'c', 'right', 'right'],
@@ -91,12 +90,12 @@ class Union():
         ['q6', '7', 'blank', 'q7', 'blank', '7', 'right', 'right'],
         ['q6', '8', 'blank', 'q7', 'blank', '8', 'right', 'right'],
         ['q6', '9', 'blank', 'q7', 'blank', '9', 'right', 'right'],
-        ['q7',',',self.blank,  'q6',self.blank,',',self.right,self.right],
-        ['q6','}',self.blank,  'q9',self.blank,self.blank,self.right,self.left],
-        ['q9',self.blank,',',  'q8',self.blank,'}',self.static,self.right],
-        ['q9',self.blank,'{',  'q10',self.blank,'{',self.static,self.right],
-        ['q10',self.blank,self.blank,  'q8',self.blank,'}',self.static,self.right],
-        ['q7','}',self.blank,  'q8',self.blank,'}',self.right,self.right],
+        ['q7',',','blank',  'q6','blank',',','right','right'],
+        ['q6','}','blank',  'q9','blank','blank','right','left'],
+        ['q9','blank',',',  'q8','blank','}','static','right'],
+        ['q9','blank','{',  'q10','blank','{','static','right'],
+        ['q10','blank','blank',  'q8','blank','}','static','right'],
+        ['q7','}','blank',  'q8','blank','}','right','right'],
     ] 
 
     def transportStr(self,tape):

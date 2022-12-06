@@ -11,8 +11,9 @@ class OperacionesView(APIView):
     def get(self, request, op, format=None):
         operaciones = {"union": 8746, "interseccion": 8745,"dif_rel": 45, "dif_sim": 916, "complemento": 773, "random": 0}
         if op in operaciones.keys(): # [8746,8745,45,916,773,0] ∪,∩,-,Δ,‾, operacionRandom
+            aux = operaciones[op]
             er = EjercicioRandom()
-            res = er.generar(operaciones[op],5,10) #res = {c1: ConjuntoA, c2:ConjuntoB, operador: operaciones[op]}
+            res = er.generar(aux,5,10) #res = {c1: ConjuntoA, c2:ConjuntoB, operador: operaciones[op]}
             return Response(res, status=status.HTTP_200_OK)
         else:
             return Response("Parametro "+str(op)+" invalido", status=status.HTTP_400_BAD_REQUEST)
@@ -21,11 +22,12 @@ class OperacionesView(APIView):
         operaciones = ["union","interseccion","dif_rel","dif_sim","complemento"]
         cinta1 = request.data['c1'].replace(" ","")
         cinta2 = request.data['c2'].replace(" ","")
+        cintaUnion = cinta1+'#'+cinta2
         res = Operacion()
         if operacion in operaciones:
             #Se realiza la operacion que se necesita
             if operacion == "union":
-                result = res.union(cinta1,cinta2)
+                result = res.union(cintaUnion)
             elif operacion == "interseccion":
                 result  = res.interseccion(cinta1,cinta2)
             elif operacion == "dif_rel":
@@ -53,18 +55,20 @@ class EjercicioView(APIView):
         if op in operaciones.keys(): # [8746,8745,45,916,773,0] ∪,∩,-,Δ,‾, operacionRandom
             result = ""
             res = er.generar(operaciones[op],3,6) #res = {c1: ConjuntoA, c2:ConjuntoB, operador: operaciones[op]}
+            cinta1 = res['c1']
+            cinta2 = res['c2']
             if res['operador'] == 8746:
-                result = mt.union(res['c1'],res['c2'])
+                result = mt.union(cinta1+'#'+cinta2)
             elif res['operador'] == 8745:
-                result  = mt.interseccion(res['c1'],res['c2'])
+                result  = mt.interseccion(cinta1,cinta2)
             elif res['operador'] == 45:
-                result  = mt.diferencia(res['c1'],res['c2'])
+                result  = mt.diferencia(cinta1,cinta2)
             elif res['operador'] == 916:
-                result  = mt.diferenciaSimetrica(res['c1'],res['c2'])
+                result  = mt.diferenciaSimetrica(cinta1,cinta2)
             elif res['operador'] == 773:
-                result  = mt.complemento(res['c2'],res['c1'])
+                result  = mt.complemento(cinta2,cinta1)
             res["result"] = result
-            res["opciones"] = OpcionesRandom().ejecutar(result,res["c1"],res["c2"])
+            res["opciones"] = OpcionesRandom().ejecutar(result,cinta1,cinta2)
             return Response(res, status=status.HTTP_200_OK)
-        else:
+        else: # for _ in range(5):
             return Response("Parametro "+str(op)+" invalido", status=status.HTTP_400_BAD_REQUEST)
