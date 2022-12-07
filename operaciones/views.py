@@ -18,6 +18,19 @@ class OperacionesView(APIView):
         else:
             return Response("Parametro "+str(op)+" invalido", status=status.HTTP_400_BAD_REQUEST)
 
+    def validar_respuesta(self,respuesta_user,respuesta_maquina):
+        valido = False
+        elementos_user = []
+        elementos_maquina = []
+        for c in respuesta_user:
+            if c != "{" and c != "}" and c != ",":
+                elementos_user.append(c)
+        for c in respuesta_maquina:
+            if c != "{" and c != "}" and c != ",":
+                elementos_maquina.append(c)
+        valido = set(elementos_user) == set(elementos_maquina)
+        return valido
+
     def post(self, request, operacion,format=None):  # request.data = {c1: ConjuntoA, c2:ConjuntoB}
         operaciones = ["union","interseccion","dif_rel","dif_sim","complemento"]
         cinta1 = request.data['c1'].replace(" ","")
@@ -39,7 +52,7 @@ class OperacionesView(APIView):
             #Si en la data que llega del front se obtiene el atributo 'respuesta' se contrasta con la obtenida por la maquina
             if 'respuesta' in  request.data.keys():
                 user_res = request.data['respuesta']
-                if user_res == result:
+                if self.validar_respuesta(user_res,result):
                     return Response("Correcto",status=status.HTTP_202_ACCEPTED)
                 return Response(result,status=status.HTTP_400_BAD_REQUEST)
             if result!= False:
